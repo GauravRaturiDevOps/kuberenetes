@@ -23,7 +23,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build -f ./node/Dockerfile "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+          dockerImage = docker.build -f node/Dockerfile "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
         }
       }
     }
