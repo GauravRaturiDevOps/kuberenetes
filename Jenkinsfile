@@ -12,7 +12,7 @@ pipeline {
         stage('Building image') {
           steps{
             script {
-                docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}", "-f ${DOCKERFILE_PATH} .")
+                docker.build("${IMAGE_REPO_NAME}:${IMAGE_TAG}", "-f ${DOCKERFILE_PATH} .")
             }
           }
         }
