@@ -9,7 +9,13 @@ pipeline {
     }
    
     stages {
-        
+        stage('Building image') {
+          steps{
+            script {
+                docker.build("${DOCKER_IMAGE}:${IMAGE_TAG}", "-f ${DOCKERFILE_PATH} .")
+            }
+          }
+        }
          stage('Logging into AWS ECR') {
             steps {
                 script {
@@ -20,13 +26,7 @@ pipeline {
         }
   
     // Building Docker images
-    stage('Building image') {
-      steps{
-        script {
-          sh "docker build -f node/Dockerfile '${IMAGE_REPO_NAME}:${IMAGE_TAG}'"
-        }
-      }
-    }
+    
    
     // Uploading Docker images into AWS ECR
     stage('Pushing to ECR') {
