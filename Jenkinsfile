@@ -4,7 +4,8 @@ pipeline {
         username = "seasiainfotechdocker"
         password = "Minddocker@123"
         IMAGE_REPO_NAME = "nodekube12"
-        IMAGE_TAG = "node-v1"
+        IMAGE_TAG = $BUILD_NUMBER
+        DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials') 
     }
    
     stages {
@@ -15,14 +16,12 @@ pipeline {
             }
           }
         }
-        //  stage('Logging into AWS ECR') {
-        //     steps {
-        //         script {
-        //         sh """docker login --username ${username} --password-stdin ${password}"""
-        //         }
-                 
-        //     }
-        // }
+        stage('Login to Docker Hub') {      	
+            steps{                       	
+        	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+        	echo 'Login Completed'      
+            }           
+        } 
   
     // Building Docker images
     
