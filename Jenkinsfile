@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    trigger {
-        include '/node'
+    when {
+        changeset "/node/**"
     }
     environment {
         IMAGE_REPO_NAME = "nodekube12"
