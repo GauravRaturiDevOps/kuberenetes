@@ -15,14 +15,14 @@ pipeline {
             }
           }
         }
-         stage('Logging into AWS ECR') {
-            steps {
-                script {
-                sh """docker login --username ${username} --password-stdin ${password}"""
-                }
+        //  stage('Logging into AWS ECR') {
+        //     steps {
+        //         script {
+        //         sh """docker login --username ${username} --password-stdin ${password}"""
+        //         }
                  
-            }
-        }
+        //     }
+        // }
   
     // Building Docker images
     
