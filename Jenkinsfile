@@ -1,10 +1,7 @@
 pipeline {
     agent any
     environment {
-        username = "seasiainfotechdocker"
-        password = "Minddocker@123"
         IMAGE_REPO_NAME = "nodekube12"
-        IMAGE_TAG = "node-v1"
         DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
     }
    
@@ -12,7 +9,7 @@ pipeline {
         stage('Building image') {
           steps{
             script {
-                docker.build("${IMAGE_REPO_NAME}:${IMAGE_TAG}", "-f node/Dockerfile .")
+                docker.build("${IMAGE_REPO_NAME}:$BUILD_NUMBER", "-f node/Dockerfile .")
             }
           }
         }
@@ -30,8 +27,8 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                sh """docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${username}/${IMAGE_REPO_NAME}:${IMAGE_TAG}"""
-                sh """docker push ${username}/${IMAGE_REPO_NAME}:${IMAGE_TAG}"""
+                sh """docker tag ${IMAGE_REPO_NAME}:$BUILD_NUMBER ${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:$BUILD_NUMBER"""
+                sh """docker push ${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:$BUILD_NUMBER"""
          }
         }
       }
