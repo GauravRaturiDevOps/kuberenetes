@@ -1,7 +1,9 @@
 pipeline {
     agent any
     when {
-        changeset "/node/**"
+        anyOf {
+            changeset "/node/**"
+        }
     }
     environment {
         IMAGE_REPO_NAME = "nodekube12"
