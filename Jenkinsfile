@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    trigger {
+        include '/node'
+    }
     environment {
         IMAGE_REPO_NAME = "nodekube12"
         DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
