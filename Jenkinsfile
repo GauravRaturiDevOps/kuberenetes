@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    when {
-        anyOf {
-            changeset "/node/**"
-        }
-    }
+    
     environment {
         IMAGE_REPO_NAME = "nodekube12"
         DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
@@ -18,6 +14,39 @@ pipeline {
             }
           }
         }
+
+        stage('Check Changes in node Folder') {
+            steps {
+                script {
+                    def changes = changeset([$class: 'Changeset'])
+                    def nodeChanges = changes.getFiles('/node/')
+                    if (nodeChanges) {
+                        echo 'Changes detected in the node folder. Starting pipeline.'
+                    } else {
+                        echo 'No changes detected in the node folder. Skipping pipeline execution.'
+                        currentBuild.result = 'ABORTED'
+                        return
+                    }
+                }
+            }
+        }
+
+        stage('Check Changes in node Folder') {
+            steps {
+                script {
+                    def changes = changeset([$class: 'Changeset'])
+                    def nodeChanges = changes.getFiles('/node/')
+                    if (nodeChanges) {
+                        echo 'Changes detected in the node folder. Starting pipeline.'
+                    } else {
+                        echo 'No changes detected in the node folder. Skipping pipeline execution.'
+                        currentBuild.result = 'ABORTED'
+                        return
+                    }
+                }
+            }
+        }
+        
         stage('Login to Docker Hub') {      	
             steps{                       	
         	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
