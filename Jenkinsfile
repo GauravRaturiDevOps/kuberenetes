@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     def changes = changeset([$class: 'Changeset'])
-                    def nodeChanges = changes.getFiles('/node/')
+                    def nodeChanges = changes.getFiles('./node/')
                     if (nodeChanges) {
                         echo 'Changes detected in the node folder. Starting pipeline.'
                     } else {
