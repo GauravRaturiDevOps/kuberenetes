@@ -14,22 +14,7 @@ pipeline {
             }
           }
         }
-
-        stage('Check Changes in node Folder') {
-            steps {
-                script {
-                    def changes = changeset([$class: 'Changeset'])
-                    def nodeChanges = changes.getFiles('/node/')
-                    if (nodeChanges) {
-                        echo 'Changes detected in the node folder. Starting pipeline.'
-                    } else {
-                        echo 'No changes detected in the node folder. Skipping pipeline execution.'
-                        currentBuild.result = 'ABORTED'
-                        return
-                    }
-                }
-            }
-        }
+        
 
         stage('Check Changes in node Folder') {
             steps {
