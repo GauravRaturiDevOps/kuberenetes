@@ -4,7 +4,7 @@ pipeline {
         username = "seasiainfotechdocker"
         password = "Minddocker@123"
         IMAGE_REPO_NAME = "nodekube12"
-        IMAGE_TAG = $BUILD_NUMBER
+        IMAGE_TAG = "node-v1"
         DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials') 
     }
    
