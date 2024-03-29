@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Node api');
+  res.send('Node kube api');
 });
 
 const port = process.env.PORT || 5000;
