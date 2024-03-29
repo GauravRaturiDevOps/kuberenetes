@@ -5,7 +5,7 @@ pipeline {
         password = "Minddocker@123"
         IMAGE_REPO_NAME = "nodekube12"
         IMAGE_TAG = "node-v1"
-        DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials') 
+        DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
     }
    
     stages {
