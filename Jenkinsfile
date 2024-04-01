@@ -48,11 +48,10 @@ pipeline {
                         git config  user.email "raturigaurav.seaisainfotech.com"
                         git config  user.name "GauravRaturiDevOps"
                         echo "i am here in username"
-                        git checkout main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         echo "i am here in build number"
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" dev/deployments.yml
-                        git add dev/deployments.yml
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" dev/deployment.yml
+                        git add . 
                         git commit -m "updated the image ${BUILD_NUMBER}"
                         git push @github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         
