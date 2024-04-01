@@ -51,11 +51,11 @@ pipeline {
                         BUILD_NUMBER=${BUILD_NUMBER}
                         echo "i am here in build number"
                         cd kubernetesdeployments
-                        sed -i "s/18/${BUILD_NUMBER}/g" dev/deployment.yml
+                        sed -i "s/45/${BUILD_NUMBER}/g" dev/deployment.yml
                         git add . 
                         git commit -m "updated the image ${BUILD_NUMBER}"
-                        git push @github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}>@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}>@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}>https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                        
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
                        
                     '''
                 }
