@@ -43,7 +43,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]){
                     sh '''
                     
-                        git pull https://github.com/GauravRaturiDevOps/kubernetesdeployments.git
+                        git clone https://github.com/GauravRaturiDevOps/kubernetesdeployments.git
+                        echo "i am here in username"
                         git config  user.email "raturigaurav.seaisainfotech.com"
                         git config  user.name "GauravRaturiDevOps"
                         echo "i am here in username"
