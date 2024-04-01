@@ -6,7 +6,7 @@ COPY node/package* ./
 
 RUN npm install 
 
-COPY . . 
+COPY node/. . 
 
 RUN npm install -g pm2
 
