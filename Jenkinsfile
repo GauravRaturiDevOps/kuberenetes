@@ -48,7 +48,7 @@ pipeline {
                         git config  user.email "raturigaurav.seaisainfotech.com"
                         git config  user.name "GauravRaturiDevOps"
                         echo "i am here in username"
-                        git checkout master
+                        git checkout main
                         BUILD_NUMBER=${BUILD_NUMBER}
                         echo "i am here in build number"
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" dev/deployments.yml
