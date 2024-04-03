@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        IMAGE_REPO_NAME = "nodekube12"
+        IMAGE_REPO_NAME = "reactkube"
         DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
     }
    
@@ -10,7 +10,7 @@ pipeline {
         stage('Building image') {
           steps{
             script {
-                docker.build("${IMAGE_REPO_NAME}:$BUILD_NUMBER", "-f node/Dockerfile .")
+                docker.build("${IMAGE_REPO_NAME}:$BUILD_NUMBER", ".")
             }
           }
         }
