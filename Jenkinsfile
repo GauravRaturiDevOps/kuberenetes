@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        IMAGE_REPO_NAME = "reactkube"
+        IMAGE_REPO_NAME = "djangokube"
         DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
     }
    
