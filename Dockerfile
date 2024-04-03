@@ -1,15 +1,13 @@
-FROM node:16
+FROM node:18.19.1
 
 WORKDIR /app
 
-COPY package* ./
+COPY package* .
 
-RUN npm install 
+RUN npm install
 
-COPY . . 
+COPY . .
 
-RUN npm install -g pm2
+EXPOSE 3000
 
-EXPOSE 5000
-
-CMD pm2 start index.js && tail -f /dev/null
+CMD ["npm", "start"]
