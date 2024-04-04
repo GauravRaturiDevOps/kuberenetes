@@ -10,7 +10,7 @@ pipeline {
         stage('Building image') {
           steps{
             script {
-                docker.build("${IMAGE_REPO_NAME}:$BUILD_NUMBER", ".")
+                docker.build("${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:$BUILD_NUMBER", ".")
             }
           }
         }
@@ -29,8 +29,8 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                sh """docker tag ${IMAGE_REPO_NAME}:$BUILD_NUMBER ${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:$BUILD_NUMBER"""
                 sh """docker push ${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:$BUILD_NUMBER"""
+                sh """docker rmi ${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:$BUILD_NUMBER"""
          }
         }
       }
@@ -52,13 +52,11 @@ pipeline {
                         PRE_BUILD_NUMBER=$((BUILD_NUMBER - 1))
                         echo "i am here in build number"
                         cd kubernetesdeployments
-                        # sed -i "21c/.*/        - image: 'seasiainfotechdocker/nodekube12:${BUILD_NUMBER}'/" dev/deployment.yml
-                        sed -i "21c\\        - image: 'seasiainfotechdocker/nodekube12:\${BUILD_NUMBER}'" dev/deployment.yml
+                        git checkout development
+                        sed -i "21c\\        - image: '${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:\${BUILD_NUMBER}'" dev/react/deployment.yml
 
-                        # sed -i \"21c        - image: 'seasiainfotechdocker/nodekube12:${BUILD_NUMBER}'\" dev/deployment.yml
-                        git add . 
                         git commit -m "updated the image ${BUILD_NUMBER}"
-                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:development
 
                        
                     '''
