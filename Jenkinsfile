@@ -53,7 +53,7 @@ pipeline {
                         PRE_BUILD_NUMBER=$((BUILD_NUMBER - 1))
                         echo "i am here in build number"
                         cd kubernetesdeployments
-                        git checkout dev
+                        git checkout development
                         # sed -i "21c/.*/        - image: 'seasiainfotechdocker/nodekube12:${BUILD_NUMBER}'/" dev/node/deployment.yml
                         sed -i "21c\\        - image: 'seasiainfotechdocker/nodekube12:\${BUILD_NUMBER}'" dev/node/deployment.yml
 
