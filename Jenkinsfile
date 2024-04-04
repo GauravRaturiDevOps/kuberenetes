@@ -10,7 +10,7 @@ pipeline {
         stage('Building image') {
           steps{
             script {
-                docker.build("${IMAGE_REPO_NAME}:$BUILD_NUMBER", "-f node/Dockerfile .")
+                docker.build("${IMAGE_REPO_NAME}:$BUILD_NUMBER", ".")
             }
           }
         }
