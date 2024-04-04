@@ -54,7 +54,7 @@ pipeline {
                         cd kubernetesdeployments
                         git checkout development
                         sed -i "21c\\        - image: '${DOCKERHUB_CREDENTIALS_USR}/${IMAGE_REPO_NAME}:\${BUILD_NUMBER}'" dev/react/deployment.yml
-
+                        git add .
                         git commit -m "updated the image ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:development
 
