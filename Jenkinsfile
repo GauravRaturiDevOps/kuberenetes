@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        IMAGE_REPO_NAME = "nodekube12"
+        IMAGE_REPO_NAME = "nodekube"
         DOCKERHUB_CREDENTIALS= credentials('DOCKER_CRED') 
     }
    
