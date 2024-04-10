@@ -1,7 +1,6 @@
-# Use the official Node.js image as base
-FROM node:18.19.1
+# Stage 1: Build the Node.js application
+FROM node:18.19.1 AS builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
@@ -13,8 +12,18 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Expose port 3000 for the application
-EXPOSE 3000
+# Build the application
+RUN npm run build
 
-# Define the command to run the application
-CMD ["npm", "start"]
+# Stage 2: Setup NGINX to serve the application
+FROM nginx:latest
+
+# Copy the built application from the previous stage
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Expose port 80 for NGINX
+EXPOSE 80
+
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]
+
